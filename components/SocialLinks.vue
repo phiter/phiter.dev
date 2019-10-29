@@ -2,7 +2,7 @@
   <section id="links">
     <ul class="links">
       <li v-for="{ icon, link, title } in links" :key="link" class="link">
-        <a target="_blank" :title="title" :href="link">
+        <a class="link" target="_blank" :title="title" :href="link">
           <component :is="icon" />
         </a>
       </li>
@@ -36,10 +36,28 @@ export default {
   justify-content: space-between;
   margin-top: 40px;
 }
-a {
+a.link {
   height: 30px;
   width: 30px;
   display: inline-block;
+  animation-fill-mode: forwards;
+  transform-origin: center;
+  &:hover {
+    animation: shake 0.3s ease;
+  }
   margin: 0 20px;
+}
+@keyframes shake {
+  0%,
+  50%,
+  100% {
+    transform: rotate(0);
+  }
+  25% {
+    transform: rotate(5deg);
+  }
+  75% {
+    transform: rotate(-5deg);
+  }
 }
 </style>
