@@ -30,6 +30,7 @@ export default {
       endY: window.innerHeight / 2,
       cursorVisible: true,
       cursorEnlarged: false,
+      isHoveringLink: false,
       $dot: document.querySelector('.cursor-dot'),
       $outline: document.querySelector('.cursor-dot-outline'),
 
@@ -41,23 +42,6 @@ export default {
         this.setupEventListeners()
         this.animateDotOutline()
       },
-
-      //     updateCursor: function(e) {
-      //         var self = this;
-
-      //         console.log(e)
-
-      //         // Show the cursor
-      //         self.cursorVisible = true;
-      //         self.toggleCursorVisibility();
-
-      //         // Position the dot
-      //         self.endX = e.pageX;
-      //         self.endY = e.pageY;
-      //         self.$dot.style.top = self.endY + 'px';
-      //         self.$dot.style.left = self.endX + 'px';
-      //     },
-
       setupEventListeners() {
         const self = this
 
@@ -65,10 +49,12 @@ export default {
         document.querySelectorAll('a').forEach(function(el) {
           el.addEventListener('mouseover', function() {
             self.cursorEnlarged = true
+            self.isHoveringLink = true
             self.toggleCursorSize()
           })
           el.addEventListener('mouseout', function() {
             self.cursorEnlarged = false
+            self.isHoveringLink = false
             self.toggleCursorSize()
           })
         })
@@ -124,7 +110,13 @@ export default {
 
       toggleCursorSize() {
         const self = this
-
+        if (self.isHoveringLink) {
+          self.$dot.classList.add('hovering-link')
+          self.$outline.classList.add('hovering-link')
+        } else {
+          self.$dot.classList.remove('hovering-link')
+          self.$outline.classList.remove('hovering-link')
+        }
         if (self.cursorEnlarged) {
           self.$dot.style.transform = 'translate(-50%, -50%) scale(0.75)'
           self.$outline.style.transform = 'translate(-50%, -50%) scale(1.5)'
@@ -153,9 +145,16 @@ export default {
   }
 }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 $primary: white;
-$primary-light: white;
+$secondary: #2d38ce;
+html,
+body {
+  &,
+  * {
+    cursor: none;
+  }
+}
 .cursor-dot,
 .cursor-dot-outline {
   pointer-events: none;
@@ -165,7 +164,8 @@ $primary-light: white;
   border-radius: 50%;
   opacity: 0;
   transform: translate(-50%, -50%);
-  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out,
+    background-color 0.3s ease-in-out, border-color 0.3s ease-in-out;
 }
 
 .cursor-dot {
@@ -173,12 +173,19 @@ $primary-light: white;
   width: $size;
   height: $size;
   border: 1px solid $primary;
+  z-index: 1000;
+  &.hovering-link {
+    border-color: $secondary;
+  }
 }
 
 .cursor-dot-outline {
   $size: 40px;
   width: $size;
   height: $size;
-  background-color: rgba($primary-light, 0.3);
+  background-color: rgba($primary, 0.3);
+  &.hovering-link {
+    background-color: rgba($secondary, 0.3);
+  }
 }
 </style>

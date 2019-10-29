@@ -75,7 +75,6 @@ body {
   font-family: 'Raleway', sans-serif;
   background-color: #1a1b2b;
   color: #ffffff;
-  cursor: none;
 }
 #main {
   z-index: 10;
