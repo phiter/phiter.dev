@@ -2,7 +2,13 @@
   <section id="links">
     <ul class="links">
       <li v-for="{ icon, link, title } in links" :key="link" class="link">
-        <a class="link" target="_blank" :title="title" :href="link">
+        <a
+          rel="noopener"
+          class="link"
+          target="_blank"
+          :title="title"
+          :href="link"
+        >
           <component :is="icon" />
         </a>
       </li>
