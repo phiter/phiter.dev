@@ -14,15 +14,18 @@
       :particles-number="15"
       :move-speed="4"
     />
+    <custom-cursor />
   </div>
 </template>
 
 <script>
 import SocialLinks from '~/components/SocialLinks.vue'
+import CustomCursor from '~/components/Cursor.vue'
 
 export default {
   components: {
-    SocialLinks
+    SocialLinks,
+    CustomCursor
   },
   head() {
     return {
@@ -60,7 +63,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 #particles-js {
   position: absolute;
   width: 100%;
@@ -72,6 +75,7 @@ body {
   font-family: 'Raleway', sans-serif;
   background-color: #1a1b2b;
   color: #ffffff;
+  cursor: none;
 }
 #main {
   z-index: 10;
@@ -80,6 +84,7 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
+  opacity: 0.9;
 }
 h1 {
   font-size: 50px;
