@@ -1,40 +1,90 @@
 <template>
   <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        phiter.dev
+    <section id="main">
+      <h1>
+        Phiter Fernandes
       </h1>
-      <h2 class="subtitle">
-        My website
-      </h2>
-      <div class="links">
-        <a href="https://nuxtjs.org/" target="_blank" class="button--green">
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-    </div>
+      <h2>Web Developer</h2>
+      <social-links :links="links" />
+    </section>
+    <vue-particles
+      color="#332657"
+      :particle-opacity="0.5"
+      :lines-distance="200"
+      :particles-number="15"
+      :move-speed="4"
+    />
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import SocialLinks from '~/components/SocialLinks.vue'
 
 export default {
   components: {
-    Logo
+    SocialLinks
+  },
+  head() {
+    return {
+      title: 'Phiter Fernandes - Web Developer',
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: "Hi, I'm Phiter, a Web Developer. This is my website :)"
+        }
+      ]
+    }
+  },
+  data() {
+    return {
+      links: [
+        {
+          title: 'Github',
+          link: 'https://github.com/phiter',
+          icon: 'GithubIcon'
+        },
+        {
+          title: 'LinkedIn',
+          link: 'https://linkedin.com/in/phiter/',
+          icon: 'LinkedinIcon'
+        },
+        {
+          title: 'Twitter',
+          link: 'https://twitter.com/phiterf',
+          icon: 'TwitterIcon'
+        }
+      ]
+    }
   }
 }
 </script>
 
 <style>
+#particles-js {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+body {
+  font-family: 'Raleway', sans-serif;
+  background-color: #1a1b2b;
+  color: #ffffff;
+}
+#main {
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+h1 {
+  font-size: 50px;
+  margin-bottom: 10px;
+}
 .container {
   margin: 0 auto;
   min-height: 100vh;
@@ -42,27 +92,5 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
-}
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
 }
 </style>
