@@ -1,5 +1,3 @@
-require('dotenv').config()
-
 export default {
   mode: 'universal',
   /*
@@ -49,8 +47,7 @@ export default {
         id: process.env.GOOGLE_ANALYTICS_ID,
         dev: false
       }
-    ],
-    '@nuxtjs/dotenv'
+    ]
   ],
   /*
    ** Nuxt.js modules

@@ -9,5 +9,10 @@
   ],
   "env": {
     "GOOGLE_ANALYTICS_ID": "@google_analytics_id"
+  },
+  "build": {
+    "env": {
+      "GOOGLE_ANALYTICS_ID": "@google_analytics_id"
+    }
   }
 }
