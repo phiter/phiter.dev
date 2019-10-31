@@ -4,10 +4,10 @@
     {
       "src": "nuxt.config.js",
       "use": "@nuxtjs/now-builder",
-      "env": {
-        "GOOGLE_ANALYTICS_ID": "@google_analytics_id"
-      },
       "config": {}
     }
-  ]
+  ],
+  "env": {
+    "GOOGLE_ANALYTICS_ID": "@google_analytics_id"
+  }
 }
