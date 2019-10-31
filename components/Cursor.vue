@@ -158,7 +158,7 @@ body {
 .cursor-dot,
 .cursor-dot-outline {
   pointer-events: none;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   border-radius: 50%;
