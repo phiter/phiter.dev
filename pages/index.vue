@@ -56,6 +56,16 @@ export default {
           title: 'Twitter',
           link: 'https://twitter.com/phiterf',
           icon: 'TwitterIcon'
+        },
+        {
+          title: 'StackOverflow',
+          link: 'https://stackoverflow.com/users/4802649/phiter',
+          icon: 'StackOverflowIcon'
+        },
+        {
+          title: 'PluralSight',
+          link: 'https://app.pluralsight.com/profile/phiter-martins',
+          icon: 'PluralSightIcon'
         }
       ]
     }

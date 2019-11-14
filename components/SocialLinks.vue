@@ -19,12 +19,16 @@
 import GithubIcon from '~/components/GithubIcon'
 import LinkedinIcon from '~/components/LinkedinIcon'
 import TwitterIcon from '~/components/TwitterIcon'
+import StackOverflowIcon from '~/components/StackOverflowIcon'
+import PluralSightIcon from '~/components/PluralSightIcon'
 
 export default {
   components: {
     GithubIcon,
     LinkedinIcon,
-    TwitterIcon
+    TwitterIcon,
+    StackOverflowIcon,
+    PluralSightIcon
   },
   props: {
     links: {
