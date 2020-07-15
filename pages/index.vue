@@ -12,12 +12,24 @@
       :particles-number="15"
       :move-speed="4"
     />
-    <custom-cursor />
+    <no-ssr>
+      <custom-cursor v-if="!isMobile" />
+    </no-ssr>
   </div>
 </template>
 
 <script>
 export default {
+  data () {
+    return {
+      isMobile: false
+    }
+  },
+  mounted () {
+    this.isMobile = /iPhone|iPad|iPod|Android/i.test(
+      window.navigator.userAgent
+    )
+  },
   head () {
     return {
       title: 'Phiter Fernandes - Web Developer',

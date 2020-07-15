@@ -87,11 +87,11 @@ a.link {
   }
 
   25% {
-    transform: rotate(5deg);
+    transform: rotate(8deg);
   }
 
   75% {
-    transform: rotate(-5deg);
+    transform: rotate(-8deg);
   }
 }
 </style>

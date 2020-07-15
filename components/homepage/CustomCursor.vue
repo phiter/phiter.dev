@@ -1,6 +1,15 @@
 <template>
-  <div :style="{ color: currentLinkColor }">
-    <div class="cursor-dot-outline" />
+  <div
+    :style="{ color: currentLinkColor }"
+    class="cursor-wrapper"
+    :class="{
+      'hovering-link' : isHoveringLink,
+      'enlarged': cursorEnlarged
+    }"
+  >
+    <div
+      class="cursor-dot-outline"
+    />
     <div class="cursor-dot" />
   </div>
 </template>
@@ -8,7 +17,9 @@
 export default {
   data () {
     return {
-      currentLinkColor: null
+      currentLinkColor: null,
+      isHoveringLink: false,
+      cursorEnlarged: false
     }
   },
   mounted () {
@@ -36,26 +47,22 @@ export default {
       setupEventListeners () {
         document.querySelectorAll('a').forEach((el) => {
           el.addEventListener('mouseover', () => {
-            this.cursorEnlarged = true
-            this.isHoveringLink = true
+            $vm.cursorEnlarged = true
+            $vm.isHoveringLink = true
             $vm.currentLinkColor = el.dataset.color
-            this.toggleCursorSize()
           })
           el.addEventListener('mouseout', () => {
-            this.cursorEnlarged = false
-            this.isHoveringLink = false
-            this.toggleCursorSize()
+            $vm.cursorEnlarged = false
+            $vm.isHoveringLink = false
           })
         })
 
         // Click events
         document.addEventListener('mousedown', () => {
-          this.cursorEnlarged = true
-          this.toggleCursorSize()
+          $vm.cursorEnlarged = true
         })
         document.addEventListener('mouseup', () => {
-          this.cursorEnlarged = false
-          this.toggleCursorSize()
+          $vm.cursorEnlarged = false
         })
 
         document.addEventListener('mousemove', (e) => {
@@ -98,20 +105,12 @@ export default {
       },
 
       toggleCursorSize () {
-        const self = this
-        if (self.isHoveringLink) {
-          self.$dot.classList.add('hovering-link')
-          self.$outline.classList.add('hovering-link')
+        if (this.cursorEnlarged) {
+          this.$dot.style.transform = 'translate(-50%, -50%) scale(0.75)'
+          this.$outline.style.transform = 'translate(-50%, -50%) scale(1.5)'
         } else {
-          self.$dot.classList.remove('hovering-link')
-          self.$outline.classList.remove('hovering-link')
-        }
-        if (self.cursorEnlarged) {
-          self.$dot.style.transform = 'translate(-50%, -50%) scale(0.75)'
-          self.$outline.style.transform = 'translate(-50%, -50%) scale(1.5)'
-        } else {
-          self.$dot.style.transform = 'translate(-50%, -50%) scale(1)'
-          self.$outline.style.transform = 'translate(-50%, -50%) scale(1)'
+          this.$dot.style.transform = 'translate(-50%, -50%) scale(1)'
+          this.$outline.style.transform = 'translate(-50%, -50%) scale(1)'
         }
       },
 
@@ -127,10 +126,7 @@ export default {
         }
       }
     }
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(
-      window.navigator.userAgent
-    )
-    if (!isMobile) { cursor.init() }
+    cursor.init()
   }
 }
 </script>
@@ -154,12 +150,12 @@ body {
   left: 50%;
   border-radius: 50%;
   opacity: 0;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) scale(1);
   transition:
-    opacity 0.3s ease-in-out,
-    transform 0.3s ease-in-out,
-    background-color 0.3s ease-in-out,
-    border-color 0.3s ease-in-out;
+    opacity 0.25s ease-in-out,
+    transform 0.25s ease-in-out,
+    background-color 0.25s ease-in-out,
+    border-color 0.25s ease-in-out;
 }
 
 .cursor-dot {
@@ -177,9 +173,23 @@ body {
   width: $size;
   height: $size;
   background-color: rgba($primary, 0.3);
+}
 
+.cursor-wrapper {
   &.hovering-link {
-    background-color: currentColor;
+    .cursor-dot-outline {
+      background-color: currentColor;
+    }
+  }
+
+  &.enlarged {
+    .cursor-dot {
+      transform: translate(-50%, -50%) scale(0.75);
+    }
+
+    .cursor-dot-outline {
+      transform: translate(-50%, -50%) scale(1.5);
+    }
   }
 }
 </style>
