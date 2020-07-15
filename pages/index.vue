@@ -27,6 +27,13 @@ export default {
           name: 'description',
           content: "Hi, I'm Phiter, a Web Developer. This is my website :)"
         }
+      ],
+      link: [
+        {
+          rel: 'stylesheet',
+          href: 'https://fonts.googleapis.com/css?family=Raleway&display=swap',
+          defer: true
+        }
       ]
     }
   }
