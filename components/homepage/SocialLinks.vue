@@ -35,7 +35,7 @@ export default {
         },
         {
           title: 'Twitter',
-          link: 'https://twitter.com/phiterf',
+          link: 'https://twitter.com/phiterdev',
           icon: require('~/assets/svg/twitter.svg'),
           color: '#00acee'
         },
