@@ -4,6 +4,8 @@
       <h1>Phiter Fernandes</h1>
       <h2>Web Developer</h2>
       <social-links />
+
+      <blog-link />
     </section>
     <vue-particles
       color="#332657"

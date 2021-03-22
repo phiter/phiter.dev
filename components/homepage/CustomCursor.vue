@@ -4,7 +4,8 @@
     class="cursor-wrapper"
     :class="{
       'hovering-link' : isHoveringLink,
-      'enlarged': cursorEnlarged
+      'enlarged': cursorEnlarged,
+      'super-enlarged': cursorSuperEnlarged
     }"
   >
     <div
@@ -19,7 +20,8 @@ export default {
     return {
       currentLinkColor: null,
       isHoveringLink: false,
-      cursorEnlarged: false
+      cursorEnlarged: false,
+      cursorSuperEnlarged: false
     }
   },
   mounted () {
@@ -33,6 +35,7 @@ export default {
       cursorVisible: true,
       cursorEnlarged: false,
       isHoveringLink: false,
+      enlargedSize: 1.5,
       $dot: document.querySelector('.cursor-dot'),
       $outline: document.querySelector('.cursor-dot-outline'),
 
@@ -48,11 +51,13 @@ export default {
         document.querySelectorAll('a').forEach((el) => {
           el.addEventListener('mouseover', () => {
             $vm.cursorEnlarged = true
+            $vm.cursorSuperEnlarged = !!el.dataset.superenlarge
             $vm.isHoveringLink = true
             $vm.currentLinkColor = el.dataset.color
           })
           el.addEventListener('mouseout', () => {
             $vm.cursorEnlarged = false
+            $vm.cursorSuperEnlarged = false
             $vm.isHoveringLink = false
           })
         })
@@ -102,16 +107,6 @@ export default {
         self.$outline.style.left = self._x + 'px'
 
         requestAnimationFrame(this.animateDotOutline.bind(self))
-      },
-
-      toggleCursorSize () {
-        if (this.cursorEnlarged) {
-          this.$dot.style.transform = 'translate(-50%, -50%) scale(0.75)'
-          this.$outline.style.transform = 'translate(-50%, -50%) scale(1.5)'
-        } else {
-          this.$dot.style.transform = 'translate(-50%, -50%) scale(1)'
-          this.$outline.style.transform = 'translate(-50%, -50%) scale(1)'
-        }
       },
 
       toggleCursorVisibility () {
@@ -177,6 +172,10 @@ body {
 
 .cursor-wrapper {
   &.hovering-link {
+    .cursor-dot {
+      background: currentColor;
+    }
+
     .cursor-dot-outline {
       background-color: currentColor;
     }
@@ -189,6 +188,12 @@ body {
 
     .cursor-dot-outline {
       transform: translate(-50%, -50%) scale(1.5);
+    }
+  }
+
+  &.super-enlarged {
+    .cursor-dot-outline {
+      transform: translate(-50%, -50%) scale(10);
     }
   }
 }
