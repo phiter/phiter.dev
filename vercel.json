@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/bsky",
+      "destination": "https://bsky.app/profile/phiter.dev",
+      "permanent": true
+    }
+  ]
+}
